@@ -5,8 +5,11 @@ data "aws_vpc" "selected" {
   }
 }
 
-data "aws_subnet" "selected" {
-  vpc_id = data.aws_vpc.selected.id
+data "aws_subnets" "selected" {
+  filter {
+    name   = "vpc-id"
+    values = [data.aws_vpc.selected.id]
+  }
 
   filter {
     name   = "map-public-ip-on-launch"
@@ -27,7 +30,7 @@ resource "aws_instance" "main" {
   instance_type = var.instance_type
   ami           = var.ami_id
 
-  subnet_id                   = data.aws_subnet.selected.id
+  subnet_id                   = data.aws_subnets.selected.id[0]
   vpc_security_group_ids      = [data.aws_security_group.selected.id]
   key_name                    = aws_key_pair.ssh_key.key_name
   associate_public_ip_address = true
