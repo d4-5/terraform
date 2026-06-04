@@ -1,14 +1,34 @@
 variable "aws_region" {
-  description = "AWS region where resources will be created"
   type        = string
-}
-
-variable "project_id" {
-  description = "Unique project identifier"
-  type        = string
+  description = "AWS region for deployment"
 }
 
 variable "bucket_name" {
-  description = "Globally unique S3 bucket name"
   type        = string
+  description = "Pre-created S3 bucket name"
+}
+
+variable "iam_group_name" {
+  type        = string
+  description = "IAM group name"
+}
+
+variable "iam_policy_name" {
+  type        = string
+  description = "IAM policy name"
+}
+
+variable "iam_role_name" {
+  type        = string
+  description = "IAM role name"
+}
+
+variable "iam_instance_profile_name" {
+  type        = string
+  description = "IAM instance profile name"
+}
+
+variable "project_id" {
+  type        = string
+  description = "Project tag value"
 }
