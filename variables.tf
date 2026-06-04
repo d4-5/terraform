@@ -1,69 +1,53 @@
+variable "ssh_key" {
+  description = "Provides custom public SSH key"
+  type        = string
+}
+
+variable "aws_keypair_name" {
+  description = "Name of the AWS EC2 key pair used for SSH access"
+  type        = string
+}
+
+variable "aws_instance_name" {
+  description = "Name of the EC2 instance to create"
+  type        = string
+}
+
+variable "project" {
+  description = "Project name"
+  default     = "epam-tf-lab"
+  type        = string
+}
+
+variable "project_id" {
+  description = "Unique project identifier"
+  type        = string
+}
+
 variable "aws_region" {
   description = "AWS region where resources will be created"
   type        = string
 }
 
-variable "vpc_name" {
-  description = "Name of the VPC"
+variable "ami_id" {
+  description = "AMI ID for the EC2 instance."
   type        = string
 }
 
-variable "vpc_cidr" {
-  description = "CIDR block for the VPC"
+variable "instance_type" {
+  description = "EC2 instance type"
+  type        = string
+  default     = "t2.micro"
+}
+
+variable "aws_security_group_name" {
+  description = "Name tag of the existing security group."
   type        = string
 }
 
-variable "subnet1_name" {
-  description = "Name of first public subnet"
-  type        = string
-}
-
-variable "subnet1_cidr" {
-  description = "CIDR block for first subnet"
-  type        = string
-}
-
-variable "availability_zone1" {
-  description = "AZ for first subnet"
-  type        = string
-}
-
-variable "subnet2_name" {
-  description = "Name of second public subnet"
-  type        = string
-}
-
-variable "subnet2_cidr" {
-  description = "CIDR block for second subnet"
-  type        = string
-}
-
-variable "availability_zone2" {
-  description = "AZ for second subnet"
-  type        = string
-}
-
-variable "subnet3_name" {
-  description = "Name of third public subnet"
-  type        = string
-}
-
-variable "subnet3_cidr" {
-  description = "CIDR block for third subnet"
-  type        = string
-}
-
-variable "availability_zone3" {
-  description = "AZ for third subnet"
-  type        = string
-}
-
-variable "internet_gateway" {
-  description = "Name of Internet Gateway"
-  type        = string
-}
-
-variable "routing_table" {
-  description = "Name of route table"
-  type        = string
+locals {
+  common_tags = {
+    Project = var.project
+    ID      = var.project_id
+  }
 }
